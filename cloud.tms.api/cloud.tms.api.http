@@ -1,0 +1,6 @@
+@cloud.tms.api_HostAddress = http://localhost:5134
+
+GET {{cloud.tms.api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
