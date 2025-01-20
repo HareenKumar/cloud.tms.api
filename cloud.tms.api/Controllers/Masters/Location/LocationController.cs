@@ -1,5 +1,5 @@
 ﻿using cloud.tms.application.DTO;
-using cloud.tms.application.Services;
+using cloud.tms.application.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cloud.tms.api.Controllers.Masters.Location
@@ -8,8 +8,8 @@ namespace cloud.tms.api.Controllers.Masters.Location
     [ApiController]
     public class LocationController : ControllerBase
     {
-        private readonly LocationService _locationService;
-        public LocationController(LocationService locationService)
+        private readonly ILocationService _locationService;
+        public LocationController(ILocationService locationService)
         {
             _locationService = locationService;
         }
@@ -18,6 +18,10 @@ namespace cloud.tms.api.Controllers.Masters.Location
         public async Task<IActionResult> GetAllLocations()
         {
             var result = await _locationService.GetAllLocationsAsync();
+            if (result == null || !result.Any())
+            {
+                return NoContent();
+            }
             return Ok(result);
         }
 
