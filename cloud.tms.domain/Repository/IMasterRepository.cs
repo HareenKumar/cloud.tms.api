@@ -1,12 +1,13 @@
 ﻿using cloud.tms.domain.Masters.Location;
 namespace cloud.tms.domain.Repository
 {
-    public interface IMasterRepository
+    public interface IMasterRepository<T> where T : class
     {
-        Task<IEnumerable<LocationEntity>> GetAllLocationsAsync();
-        Task<LocationEntity> GetLocationByIdAsync(int id);
-        Task<int> CreateLocationAsync(LocationEntity locationEntity);
-        Task<bool> UpdateLocationAsync(LocationEntity locationEntity);
-        Task<bool> DeleteLocationAsync(int id);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetByIdAsync(int id);
+        Task<int> CreateAsync(T Entity);
+        Task<bool> UpdateAsync(int id, T Entity);
+        Task<bool> DeleteAsync(int id);
     }
+
 }

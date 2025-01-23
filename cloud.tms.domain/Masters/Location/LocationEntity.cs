@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using cloud.tms.domain.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace cloud.tms.domain.Masters.Location
 {
-    public class LocationEntity
+    [Table("Locations")]
+    public class LocationEntity : BaseEntity
     {
-        public int Id { get; set; }
         public string LocationName { get; set; }
         public string ContactName { get; set; }
         public string AddressLine1 { get; set; }
