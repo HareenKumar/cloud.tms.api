@@ -1,6 +1,6 @@
 ﻿using cloud.tms.application.DTO;
 
-namespace cloud.tms.application.Service
+namespace cloud.tms.application.Service.Masters.Locations
 {
     public interface ILocationService
     {
