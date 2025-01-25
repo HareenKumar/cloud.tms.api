@@ -5,13 +5,13 @@ using AutoMapper;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 
-namespace cloud.tms.application.Service
+namespace cloud.tms.application.Service.Masters.Locations
 {
     public class LocationService : ILocationService
     {
         private readonly IMasterRepository<LocationEntity> _masterRepository;
         private readonly IMapper _mapper;
-        public LocationService(IMasterRepository<LocationEntity> masterRepository, IMapper mapper) 
+        public LocationService(IMasterRepository<LocationEntity> masterRepository, IMapper mapper)
         {
             _masterRepository = masterRepository;
             _mapper = mapper;
@@ -35,7 +35,7 @@ namespace cloud.tms.application.Service
             //    CountryCode = locationDto.CountryCode,
             //    Email = locationDto.Email,
             //    Status = locationDto.Status,
-                
+
             //};
             //return await _masterRepository.CreateAsync(location);
         }
@@ -63,7 +63,7 @@ namespace cloud.tms.application.Service
             //    Email = s.Email,
             //    Phone = s.Phone,
             //    Status = s.Status,
-                
+
             //});
             var entities = await _masterRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<LocationDto>>(entities);

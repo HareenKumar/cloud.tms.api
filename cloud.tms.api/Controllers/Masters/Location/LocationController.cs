@@ -1,5 +1,5 @@
 ﻿using cloud.tms.application.DTO;
-using cloud.tms.application.Service;
+using cloud.tms.application.Service.Masters.Locations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cloud.tms.api.Controllers.Masters.Location

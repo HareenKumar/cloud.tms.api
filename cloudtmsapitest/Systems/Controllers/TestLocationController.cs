@@ -1,5 +1,5 @@
 ﻿using cloud.tms.api.Controllers.Masters.Location;
-using cloud.tms.application.Service;
+using cloud.tms.application.Service.Masters.Locations;
 using cloudtmsapitest.MockData.Locations;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
