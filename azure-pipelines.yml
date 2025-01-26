@@ -11,10 +11,15 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  project: '**/*.csproj' # Ensure this points to the correct project file(s)
-  tests: '**/*Tests/*.csproj' # Ensure this points to the test project(s)
+  project: '**/*.csproj'
+  tests: '**/*Tests/*.csproj'
 
 steps:
+# Explicitly Check Out the Repository
+- checkout: self
+  displayName: 'Checkout Repository'
+  fetchDepth: 1
+
 # Install NuGet Tool
 - task: NuGetToolInstaller@1
   displayName: 'Install NuGet'
@@ -52,3 +57,4 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'cloudtmsapi'
     publishLocation: 'Container'
+
