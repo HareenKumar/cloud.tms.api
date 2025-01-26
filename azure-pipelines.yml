@@ -1,0 +1,46 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+  name: 'NugetToolInstaller' 
+- task: DotNetCoreCLI@2
+  name: 'RestoreNuget'
+  inputs:
+    azureSubscription: 'Azure subscription 1(7fd380d1-4ffd-4972-b12e-7718f5849e8f)'
+    command: 'restore'
+    feedsToUse: 'select'
+- task: DotNetCoreCLI@2
+  name: 'Unitest'
+  inputs:
+    command: 'test'
+    projects: '$(tests)'
+    arguments: '--configuration $(buildconfiguration)'
+    vstsFeed: 'e95bf1cc-bd2c-4922-8e08-7b63da1fe662'
+
+- task: DotNetCoreCLI@2
+  name: 'buildArtifact'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '$(project)'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactstagingDirectory)'
+    zipAfterPublish: true
+
+- task: PublishBuildArtifacts@1
+  name: 'PublishArtifact'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactstagingDirectory)'
+    ArtifactName: 'cloudtmsapi'
+    publishLocation: Container
