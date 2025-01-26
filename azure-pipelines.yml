@@ -11,36 +11,44 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  project: '**/*.csproj' # Ensure this points to the correct project file(s)
+  tests: '**/*Tests/*.csproj' # Ensure this points to the test project(s)
 
 steps:
+# Install NuGet Tool
 - task: NuGetToolInstaller@1
-  name: 'NugetToolInstaller' 
+  displayName: 'Install NuGet'
+
+# Restore NuGet Packages
 - task: DotNetCoreCLI@2
-  name: 'RestoreNuget'
+  displayName: 'Restore NuGet Packages'
   inputs:
-    azureSubscription: 'Azure subscription 1(7fd380d1-4ffd-4972-b12e-7718f5849e8f)'
     command: 'restore'
     feedsToUse: 'select'
+    includeNuGetOrg: true
+
+# Run Unit Tests
 - task: DotNetCoreCLI@2
-  name: 'Unitest'
+  displayName: 'Run Unit Tests'
   inputs:
     command: 'test'
     projects: '$(tests)'
-    arguments: '--configuration $(buildconfiguration)'
-    vstsFeed: 'e95bf1cc-bd2c-4922-8e08-7b63da1fe662'
+    arguments: '--configuration $(buildConfiguration)'
 
+# Build and Publish Project
 - task: DotNetCoreCLI@2
-  name: 'buildArtifact'
+  displayName: 'Build and Publish Project'
   inputs:
     command: 'publish'
     publishWebProjects: false
     projects: '$(project)'
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactstagingDirectory)'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: true
 
+# Publish Build Artifacts
 - task: PublishBuildArtifacts@1
-  name: 'PublishArtifact'
+  displayName: 'Publish Build Artifacts'
   inputs:
-    PathtoPublish: '$(Build.ArtifactstagingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'cloudtmsapi'
-    publishLocation: Container
+    publishLocation: 'Container'
