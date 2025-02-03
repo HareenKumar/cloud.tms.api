@@ -46,14 +46,14 @@ namespace cloud.tms.api.Controllers.Masters.Location
         {
             var result = await _locationService.UpdateLocationAsync(id, locationDto);
             if(!result) return NotFound();
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLocation(int id)
         {
             var result = await _locationService.DeleteLocationAsync(id); if(!result) return NotFound();
-            return NoContent();
+            return Ok(result);
         }
     }
 }

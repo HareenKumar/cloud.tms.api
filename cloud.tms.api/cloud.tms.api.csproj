@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\cloud.tms.application\cloud.tms.application.csproj" />
+    <ProjectReference Include="..\cloud.tms.core\cloud.tms.core.csproj" />
     <ProjectReference Include="..\cloud.tms.domain\cloud.tms.domain.csproj" />
     <ProjectReference Include="..\cloud.tms.infrastructure\cloud.tms.infrastructure.csproj" />
   </ItemGroup>
