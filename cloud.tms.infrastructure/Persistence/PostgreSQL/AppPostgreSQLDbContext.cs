@@ -28,6 +28,8 @@ namespace cloud.tms.infrastructure.Persistence.PostgreSQL
                 // Configure the entity's table name and primary key
                 modelBuilder.Entity(entityType).ToTable(tableName); // Use the modified table name
                 modelBuilder.Entity(entityType).HasKey("Id");       // Assumes each entity has an "Id" property
+
+                
             }
 
             // Apply additional configurations from the assembly

@@ -2,6 +2,7 @@
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using cloud.tms.infrastructure.Persistence.PostgreSQL;
@@ -11,9 +12,11 @@ using cloud.tms.infrastructure.Persistence.PostgreSQL;
 namespace cloud.tms.infrastructure.Migrations
 {
     [DbContext(typeof(AppPostgreSQLDbContext))]
-    partial class AppPostgreSQLDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250203025204_Users")]
+    partial class Users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

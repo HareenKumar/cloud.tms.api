@@ -3,6 +3,7 @@ using cloud.tms.domain.Masters.Location;
 using cloud.tms.infrastructure.Persistence.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using cloud.tms.domain.Common;
+using System.Linq.Expressions;
 
 namespace cloud.tms.infrastructure.Repository
 {
@@ -81,6 +82,11 @@ namespace cloud.tms.infrastructure.Repository
 
             await _appPostgreSQLDbContext.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _appPostgreSQLDbContext.GetDbSet<T>().AnyAsync(predicate);
         }
 
 
